@@ -11,44 +11,45 @@ var cardAdjustment = false
 
 struct ContentView: View {
     
-    let halloweenEmojis: [String] = ["👻", "🎃", "🕷️", "💀", "😈", "🕸️", "🧙", "🙀", "👹", "😱", "👺", "😳"]
-    let signLanguageEmojis: [String] = ["🤲", "👏", "👍", "👎", "👊", "✊", "🤟", "👌", "🤌", "👉", "🙏", "🫵", "👋", "🖕"]
-    let animalEmojis: [String] = ["🐶", "🐼", "🐍", "🐸", "🦄", "🐖", "🐿️", "🐮", "🐙", "🐔", "🐳", "🐻", "🫎", "🐗", "🐝"]
-    let emojiArray: [[String]]
+    let numThemes: Int = 3
+    @State var cardCount: Int = 4
+    @State var themeSelector: Int = 0
     
+    //let halloweenEmojis: [String] = ["👻", "🎃", "🕷️", "💀", "😈", "🕸️", "🧙", "🙀", "👹", "😱", "👺", "😳"]
+    //let signLanguageEmojis: [String] = ["🤲", "👏", "👍", "👎", "👊", "✊", "🤟", "👌", "🤌", "👉", "🙏", "🫵", "👋", "🖕"]
+    //let animalEmojis: [String] = ["🐶", "🐼", "🐍", "🐸", "🦄", "🐖", "🐿️", "🐮", "🐙", "🐔", "🐳", "🐻", "🫎", "🐗", "🐝"]
+    
+    let emojiArray: [[String]] = [
+            ["👻", "🎃", "🕷️", "💀", "😈"],
+            ["🤲", "👏", "👍", "👎", "👊"],
+            ["🐶", "🐼", "🐍", "🐸", "🦄"]
+        ]
+      
     let imageDict: [Int: String] = [0: "teddybear.fill", 1: "hand.raised.fill", 2: "pawprint.fill"]
     let themeDict: [Int: String] = [0: "Halloween", 1: "Sign Lang", 2: "Animals"]
     
-    init() {
-        emojiArray = [halloweenEmojis, signLanguageEmojis, animalEmojis]
-    }
+    @State var shuffledEmojiArr: [String] = []
     
-    
-    let numThemes: Int = 3
-    @State var cardCount: Int = 4
-    @State var themeSelector: Int = 2
     
     var body: some View {
         
         VStack {
             ScrollView {
-                
                 Text("Memorize!")
                     .font(.largeTitle)
-
                 
                 cardInit
-                //Spacer()
             }
+            themeButtons()
+            
 #if cardAdjustment
             cardCountAdjuster
 #endif
-            
-            themeButtons()
-
-            
         }
         .padding()
+        .onAppear {
+            updatedShuffledEmojiArr()
+        }
         
     }
     
@@ -70,13 +71,18 @@ struct ContentView: View {
     }
     
     var cardInit: some View {
+        
         LazyVGrid(columns: [GridItem(.adaptive(minimum: 120, maximum: .infinity))]) {
-            ForEach(0..<cardCount, id: \.self) { index in
-                CardView(content: emojiArray[themeSelector][index])
+            ForEach(0..<shuffledEmojiArr.count, id: \.self) { index in
+                CardView(content: shuffledEmojiArr[index])
                     .aspectRatio(2/3, contentMode: .fit)
             }
         }
-        .foregroundColor(.orange)
+        .foregroundColor(.indigo)
+    }
+    
+    func updatedShuffledEmojiArr() {
+        shuffledEmojiArr = (emojiArray[themeSelector] + emojiArray[themeSelector]).shuffled()
     }
     
 #if cardAdjustment
