@@ -41,6 +41,9 @@ struct ContentView: View {
                 cardInit
             }
             themeButtons()
+                .onChange(of: themeSelector) {
+                    updatedShuffledEmojiArr()
+                }
             
 #if cardAdjustment
             cardCountAdjuster
