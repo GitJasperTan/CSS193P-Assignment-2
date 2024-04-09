@@ -7,32 +7,27 @@
 
 import SwiftUI
 
+/* DO NOT ENABLE
+    Code under this macro is only for reference purposes
+ */
 var cardAdjustment = false
 
 struct ContentView: View {
     
-    let numThemes: Int = 3
-    @State var cardCount: Int = 4
     @State var themeSelector: Int = 0
-    
-    //let halloweenEmojis: [String] = ["👻", "🎃", "🕷️", "💀", "😈", "🕸️", "🧙", "🙀", "👹", "😱", "👺", "😳"]
-    //let signLanguageEmojis: [String] = ["🤲", "👏", "👍", "👎", "👊", "✊", "🤟", "👌", "🤌", "👉", "🙏", "🫵", "👋", "🖕"]
-    //let animalEmojis: [String] = ["🐶", "🐼", "🐍", "🐸", "🦄", "🐖", "🐿️", "🐮", "🐙", "🐔", "🐳", "🐻", "🫎", "🐗", "🐝"]
-    
+    @State var shuffledEmojiArr: [String] = []
+
     let emojiArray: [[String]] = [
-            ["👻", "🎃", "🕷️", "💀", "😈"],
-            ["🤲", "👏", "👍", "👎", "👊"],
+            ["👻", "🎃", "🕷️", "💀", "😈", "🕸️"],
+            ["🤲", "👏", "👍", "👎"],
             ["🐶", "🐼", "🐍", "🐸", "🦄"]
         ]
       
     let imageDict: [Int: String] = [0: "teddybear.fill", 1: "hand.raised.fill", 2: "pawprint.fill"]
     let themeDict: [Int: String] = [0: "Halloween", 1: "Sign Lang", 2: "Animals"]
     
-    @State var shuffledEmojiArr: [String] = []
-    
-    
+
     var body: some View {
-        
         VStack {
             ScrollView {
                 Text("Memorize!")
@@ -40,6 +35,8 @@ struct ContentView: View {
                 
                 cardInit
             }
+            
+            
             themeButtons()
                 .onChange(of: themeSelector) {
                     updatedShuffledEmojiArr()
@@ -59,7 +56,7 @@ struct ContentView: View {
     
     func themeButtons() -> some View {
         HStack {
-            ForEach(0..<numThemes, id: \.self) { index in
+            ForEach(0..<emojiArray.count, id: \.self) { index in
                 Spacer()
                 if (themeSelector == index) {
                     ThemeButtonView(imageName: imageDict[index] ?? "questionmark.app", themeNum: index + 1, themeText: themeDict[index] ?? ("Theme " + String(index + 1)), themeSelector: $themeSelector)
@@ -69,13 +66,12 @@ struct ContentView: View {
                 }
                 Spacer()
             }
-
         }
     }
     
     var cardInit: some View {
         
-        LazyVGrid(columns: [GridItem(.adaptive(minimum: 120, maximum: .infinity))]) {
+        LazyVGrid(columns: [GridItem(.adaptive(minimum: 80, maximum: .infinity))]) {
             ForEach(0..<shuffledEmojiArr.count, id: \.self) { index in
                 CardView(content: shuffledEmojiArr[index])
                     .aspectRatio(2/3, contentMode: .fit)
