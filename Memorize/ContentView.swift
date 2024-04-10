@@ -25,6 +25,7 @@ struct ContentView: View {
       
     let imageDict: [Int: String] = [0: "teddybear.fill", 1: "hand.raised.fill", 2: "pawprint.fill"]
     let themeDict: [Int: String] = [0: "Halloween", 1: "Sign Lang", 2: "Animals"]
+    let cardColorDict: [Int: Color] = [0: .orange, 1: .green, 2: .indigo]
     
 
     var body: some View {
@@ -77,7 +78,8 @@ struct ContentView: View {
                     .aspectRatio(2/3, contentMode: .fit)
             }
         }
-        .foregroundColor(.indigo)
+        .foregroundStyle(cardColorDict[themeSelector] ?? .orange)
+        
     }
     
     func updatedShuffledEmojiArr() {
@@ -128,6 +130,7 @@ struct ThemeButtonView: View {
         .disabled(imageName != "questionmark.app")
     }
 }
+
 
 struct CardView: View {
     
