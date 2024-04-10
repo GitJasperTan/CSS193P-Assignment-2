@@ -19,12 +19,12 @@ struct ContentView: View {
 
     let emojiArray: [[String]] = [
             ["👻", "🎃", "🕷️", "💀", "😈", "🕸️"],
-            ["🤲", "👏", "👍", "👎"],
+            ["✈️", "🚁", "🚀", "🚘", "🛵", "⛵️", "🛸", "🚲"],
             ["🐶", "🐼", "🐍", "🐸", "🦄"]
         ]
       
     let imageDict: [Int: String] = [0: "teddybear.fill", 1: "hand.raised.fill", 2: "pawprint.fill"]
-    let themeDict: [Int: String] = [0: "Halloween", 1: "Sign Lang", 2: "Animals"]
+    let themeDict: [Int: String] = [0: "Halloween", 1: "Vehicles", 2: "Animals"]
     let cardColorDict: [Int: Color] = [0: .orange, 1: .green, 2: .indigo]
     
 
@@ -36,7 +36,6 @@ struct ContentView: View {
                 
                 cardInit
             }
-            
             
             themeButtons()
                 .onChange(of: themeSelector) {
@@ -72,7 +71,7 @@ struct ContentView: View {
     
     var cardInit: some View {
         
-        LazyVGrid(columns: [GridItem(.adaptive(minimum: 80, maximum: .infinity))]) {
+        LazyVGrid(columns: [GridItem(.adaptive(minimum: cardWidth, maximum: .infinity))]) {
             ForEach(0..<shuffledEmojiArr.count, id: \.self) { index in
                 CardView(content: shuffledEmojiArr[index])
                     .aspectRatio(2/3, contentMode: .fit)
@@ -82,8 +81,37 @@ struct ContentView: View {
         
     }
     
+    var cardWidth: CGFloat {
+        
+        if (shuffledEmojiArr.count <= 4) {
+            /* If arr has less than or eq 4 cards, make width 120. Max cards on screen with 120 width is 4 cards*/
+            return 120
+        }
+        else if (shuffledEmojiArr.count <= 9) {
+            /* If arr has less than or eq 9 cards, make width 100. Max cards on screen with 100 width is 9 cards*/
+            return 100
+        }
+        else {
+            /* If arr has more than 9 cards, make width 80. Max cards on screen with 80 width is 16 cards. Scroll view is present though so more than 16 cards allowed*/
+            return 80
+        }
+    }
+    
     func updatedShuffledEmojiArr() {
-        shuffledEmojiArr = (emojiArray[themeSelector] + emojiArray[themeSelector]).shuffled()
+        
+        /* Select a random number of cards to display in Memorize Game*/
+        
+        //Get random number between 1 and number of emojis
+        let randNum = Int.random(in: 1...emojiArray[themeSelector].count)
+        
+        //Shuffle array prior to selecting random number of cards
+        shuffledEmojiArr = emojiArray[themeSelector].shuffled()
+        
+        // Store cards 1 to randNum in to shuffled array
+        shuffledEmojiArr.removeSubrange(randNum..<shuffledEmojiArr.count)
+        
+        // Double the array to create pairs and reshuffle the order
+        shuffledEmojiArr = (shuffledEmojiArr + shuffledEmojiArr).shuffled()
     }
     
 #if cardAdjustment
