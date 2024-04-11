@@ -23,7 +23,7 @@ struct ContentView: View {
             ["🐶", "🐼", "🐍", "🐸", "🦄"]
         ]
       
-    let imageDict: [Int: String] = [0: "teddybear.fill", 1: "hand.raised.fill", 2: "pawprint.fill"]
+    let imageDict: [Int: String] = [0: "teddybear.fill", 1: "car.fill", 2: "pawprint.fill"]
     let themeDict: [Int: String] = [0: "Halloween", 1: "Vehicles", 2: "Animals"]
     let cardColorDict: [Int: Color] = [0: .orange, 1: .green, 2: .indigo]
     
