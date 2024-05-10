@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A33F4FAB2BEDE06800626AAC /* MemorizeGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33F4FAA2BEDE06800626AAC /* MemorizeGame.swift */; };
 		A3823C3A2BB3D63F0061FD8F /* MemorizeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3823C392BB3D63F0061FD8F /* MemorizeApp.swift */; };
 		A3823C3C2BB3D63F0061FD8F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3823C3B2BB3D63F0061FD8F /* ContentView.swift */; };
 		A3823C3E2BB3D6420061FD8F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A3823C3D2BB3D6420061FD8F /* Assets.xcassets */; };
@@ -14,6 +15,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A33F4FAA2BEDE06800626AAC /* MemorizeGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemorizeGame.swift; sourceTree = "<group>"; };
 		A3823C362BB3D63F0061FD8F /* Memorize.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Memorize.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3823C392BB3D63F0061FD8F /* MemorizeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemorizeApp.swift; sourceTree = "<group>"; };
 		A3823C3B2BB3D63F0061FD8F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -32,6 +34,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A33F4FA92BEDE03E00626AAC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A33F4FAA2BEDE06800626AAC /* MemorizeGame.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		A3823C2D2BB3D63F0061FD8F = {
 			isa = PBXGroup;
 			children = (
@@ -51,6 +61,7 @@
 		A3823C382BB3D63F0061FD8F /* Memorize */ = {
 			isa = PBXGroup;
 			children = (
+				A33F4FA92BEDE03E00626AAC /* Model */,
 				A3823C392BB3D63F0061FD8F /* MemorizeApp.swift */,
 				A3823C3B2BB3D63F0061FD8F /* ContentView.swift */,
 				A3823C3D2BB3D6420061FD8F /* Assets.xcassets */,
@@ -139,6 +150,7 @@
 			files = (
 				A3823C3C2BB3D63F0061FD8F /* ContentView.swift in Sources */,
 				A3823C3A2BB3D63F0061FD8F /* MemorizeApp.swift in Sources */,
+				A33F4FAB2BEDE06800626AAC /* MemorizeGame.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
